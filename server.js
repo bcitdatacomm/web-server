@@ -16,13 +16,16 @@ var port = process.env.PORT || 8888;
 
 mongoose.connect(config.database);
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+
 app.use(bodyParser.json());
 
 app.use(morgan('dev')); // logging
 
 app.get('/', function(req, res) {
-    res.send('LRS Server');
+  res.send('LRS Server');
 });
 
 // routing
@@ -31,6 +34,8 @@ app.use(require('./app/routes/register'));
 app.use(require('./app/routes/login'));
 app.use(require('./app/routes/auth'));
 app.use(require('./app/routes/users'));
+app.use(require('./app/routes/report_match'));
+app.use(require('./app/routes/user'));
 
 // start server
 
