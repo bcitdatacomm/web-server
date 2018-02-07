@@ -1,6 +1,7 @@
 # api
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/bcitdatacomm/api.svg)](https://greenkeeper.io/)
+
 This repository contains a server which handles the registration, authentication, and long term data storage for the game. 
 
 ## Download
