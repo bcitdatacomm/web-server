@@ -4,6 +4,8 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 
+var bcrypt = require('bcrypt');
+
 var router = express.Router();
 
 router.post('/api/register', function(req, res) {
@@ -23,11 +25,13 @@ router.post('/api/register', function(req, res) {
     if (user) {
       res.json({ success: false, message: 'Register failed. Someone already has this name.' });
     } else {
-      var newUser = new User({
-        name: name,
-        password: password,
-        admin: false
-      });
+       bcrypt.genSalt(12, function(err, salt) {
+         bcrypt.hash(password, salt, function(err, hash) {
+         var newUser = new User({
+           name: name,
+           password: hash,
+           admin: false
+       });
 
       newUser.save(function(err) {
         if (err) {
@@ -40,8 +44,7 @@ router.post('/api/register', function(req, res) {
           message: 'New user created.'
         });
       });
-    }
-
+    });
   });
 
 });
