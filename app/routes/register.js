@@ -13,13 +13,26 @@ router.post('/api/register', function(req, res) {
   var name = req.body.name;
   var password = req.body.password;
 
-  bcrypt.genSalt(12, function(err, salt) {
-    bcrypt.hash(password, salt, function(err, hash) {
-      var newUser = new User({
-        name: name,
-        password: hash,
-        admin: false
-      });
+  // make sure user doesn't already exist
+  User.findOne({
+    name: name
+  }, function(err, user) {
+
+    if (err) {
+      throw err;
+    }
+
+    if (user) {
+      res.json({ success: false, message: 'Register failed. Someone already has this name.' });
+    } else {
+       bcrypt.genSalt(12, function(err, salt) {
+         bcrypt.hash(password, salt, function(err, hash) {
+         var newUser = new User({
+           name: name,
+           password: hash,
+           admin: false
+       });
+
       newUser.save(function(err) {
         if (err) {
           throw err;

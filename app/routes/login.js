@@ -11,12 +11,15 @@ var router = express.Router();
 // header.payload.signature
 router.post('/api/login', function(req, res) {
 
+  var name = req.body.name;
+  var password = req.body.password;
+
   // TODO: Decide when a token should expire
   var expiry = 60; // one hour
 
   // find the user
   User.findOne({
-    name: req.body.name
+    name: name
   }, function(err, user) {
 
     if (err) {
@@ -48,7 +51,6 @@ router.post('/api/login', function(req, res) {
           res.json({ success: false, message: 'Authentication failed. Wrong password.' });
         }
       });
-
     }
   });
 });
