@@ -27,7 +27,10 @@ router.post('/api/login', function(req, res) {
     }
 
     if (!user) {
-      res.json({ success: false, message: 'Authentication failed. User not found.' });
+      res.json({
+        success: false,
+        message: 'Authentication failed. User not found.'
+      });
     } else if (user) {
 
       bcrypt.compare(req.body.password, user.password, function(err, success) {
@@ -48,7 +51,10 @@ router.post('/api/login', function(req, res) {
             token: token
           });
         } else {
-          res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+          res.json({
+            success: false,
+            message: 'Authentication failed. Wrong password.'
+          });
         }
       });
     }

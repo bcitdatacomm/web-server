@@ -15,7 +15,10 @@ router.use(function(req, res, next) {
     jwt.verify(token, process.env.SECRET, function(err, decoded) {
       if (err) {
         // token didn't pass auth
-        return res.json({ success: false, message: 'Failed to authenticate token.' });
+        return res.json({
+          success: false,
+          message: 'Failed to authenticate token.'
+        });
       } else {
         // auth success
         req.decoded = decoded;
@@ -27,8 +30,8 @@ router.use(function(req, res, next) {
 
     // token not passed at all
     return res.status(403).send({
-        success: false,
-        message: 'No token provided. Please see /api/login'
+      success: false,
+      message: 'No token provided. Please see /api/login'
     });
 
   }

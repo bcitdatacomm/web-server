@@ -23,30 +23,36 @@ router.post('/api/register', function(req, res) {
     }
 
     if (user) {
-      res.json({ success: false, message: 'Register failed. Someone already has this name.' });
+      res.json({
+        success: false,
+        message: 'Register failed. Someone already has this name.'
+      });
     } else {
-       bcrypt.genSalt(12, function(err, salt) {
-         bcrypt.hash(password, salt, function(err, hash) {
-         var newUser = new User({
-           name: name,
-           password: hash,
-           admin: false
-       });
 
-      newUser.save(function(err) {
-        if (err) {
-          throw err;
-        }
+      bcrypt.genSalt(12, function(err, salt) {
+        bcrypt.hash(password, salt, function(err, hash) {
+          var newUser = new User({
+            name: name,
+            password: hash,
+            admin: false
+          });
 
-        console.log('New user created successfully');
-        res.json({
-          success: true,
-          message: 'New user created.'
+          newUser.save(function(err) {
+            if (err) {
+              throw err;
+            }
+
+            console.log('New user created successfully');
+            res.json({
+              success: true,
+              message: 'New user created.'
+            });
+
+          });
         });
       });
-    });
+    }
   });
-
 });
 
 module.exports = router;
