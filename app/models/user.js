@@ -5,7 +5,10 @@ var Schema = mongoose.Schema;
 // Last updated: 2017/02/06 as per #49
 module.exports = mongoose.model('User', new Schema({
   name: String,
-  password: String,
+  password: {
+    type: String,
+    select: false
+  },
   admin: Boolean,
   shots_fired: Number,
   kills: Number,
