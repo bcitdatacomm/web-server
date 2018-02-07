@@ -43,6 +43,8 @@ This section documents the available endpoints of the API.
 
 POST - `/api/login`
 
+Log in an existing user. Pass in the name and password. Token is returned. 
+
 #### Parameters
 `name`
 `password`
@@ -54,6 +56,8 @@ POST - `/api/login`
 
 POST - `/api/register`
 
+Register a new user. Pass in desired name and password.
+
 #### Parameters
 `name`
 `password`
@@ -61,6 +65,8 @@ POST - `/api/register`
 
 ## report_match
 POST - `/api/report_match`
+
+Reports the statistics for a users match. Requires a token and a user to report for. See parameters for other information to be posted.
 
 #### Parameters
 `token`
@@ -79,11 +85,15 @@ POST - `/api/report_match`
 ## users
 GET - `/api/users`
 
+Gets all users. Requires a token.
+
 #### Parameters
 `token`
 
 ## user
 GET - `/api/user`
+
+Gets a user by name. Requires a token.
 
 #### Parameters
 `token`
