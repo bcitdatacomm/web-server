@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var morganBody = require('morgan-body');
 var mongoose = require('mongoose');
 
 var bcrypt = require('bcrypt');
@@ -23,6 +24,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use(morgan('dev')); // logging
+
+morganBody(app);
 
 app.get('/', function(req, res) {
   res.send('LRS Server');
