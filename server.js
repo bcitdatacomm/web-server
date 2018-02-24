@@ -30,6 +30,7 @@ app.get('/', function(req, res) {
 
 // routing
 // public routes need to be above auth.js
+app.use(require('./app/routes/connect'));
 app.use(require('./app/routes/register'));
 app.use(require('./app/routes/login'));
 app.use(require('./app/routes/auth'));

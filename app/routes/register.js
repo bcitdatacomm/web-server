@@ -35,12 +35,12 @@ router.post('/api/register', function(req, res) {
             name: name,
             password: hash,
             admin: false,
-            shots_fired: 0,
-            kills: 0,
-            deaths: 0,
-            games_played: 0,
-            games_won: 0,
-            time_played: 0
+            shots_fired: parseInt(0),
+            kills: parseInt(0),
+            deaths: parseInt(0),
+            games_played: parseInt(0),
+            games_won: parseInt(0),
+            time_played: parseInt(0)
           });
 
           newUser.save(function(err) {

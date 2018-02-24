@@ -46,7 +46,7 @@ router.post('/api/login', function(req, res) {
           res.json({
             success: true,
             message: 'Token created.',
-            user: user.name,
+            name: user.name,
             duration: expiry,
             token: token
           });
@@ -58,7 +58,7 @@ router.post('/api/login', function(req, res) {
         }
       });
     }
-  }).select('+password'); // also return password for this endpoint only
+  }).select('+password'); // also query password for this endpoint only
 });
 
 module.exports = router;
