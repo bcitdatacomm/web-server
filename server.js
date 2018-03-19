@@ -5,7 +5,7 @@ var morgan = require('morgan');
 var morganBody = require('morgan-body');
 var mongoose = require('mongoose');
 
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var dotenv = require('dotenv').load();
 
 var jwt = require('jsonwebtoken');
