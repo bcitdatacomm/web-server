@@ -47,7 +47,6 @@ router.post('/api/register', function(req, res) {
               throw err;
             }
 
-            console.log('New user created successfully');
             res.json({
               success: true,
               message: 'New user created.'
