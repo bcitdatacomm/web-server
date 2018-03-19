@@ -22,6 +22,8 @@ router.post('/api/login', function(req, res) {
     name: name
   }, function(err, user) {
 
+    console.log("query done");
+
     if (err) {
       throw err;
     }
@@ -33,30 +35,38 @@ router.post('/api/login', function(req, res) {
       });
     } else if (user) {
 
-      bcrypt.compare(req.body.password, user.password, function(err, success) {
-        if (success) {
-          const payload = {
-            admin: user.admin
-          };
 
-          var token = jwt.sign(payload, process.env.SECRET, {
-            expiresIn: expiry
-          });
+      function bcrypt_callback() {
+        console.log("using query data");
+        bcrypt.compare(req.body.password, user.password, function(err, success) {
+          if (success) {
+            const payload = {
+              admin: user.admin
+            };
 
-          res.json({
-            success: true,
-            message: 'Token created.',
-            name: user.name,
-            duration: expiry,
-            token: token
-          });
-        } else {
-          res.json({
-            success: false,
-            message: 'Authentication failed. Wrong password.'
-          });
-        }
-      });
+            var token = jwt.sign(payload, process.env.SECRET, {
+              expiresIn: expiry
+            });
+
+            res.json({
+              success: true,
+              message: 'Token created.',
+              name: user.name,
+              duration: expiry,
+              token: token
+            });
+          } else {
+            res.json({
+              success: false,
+              message: 'Authentication failed. Wrong password.'
+            });
+          }
+        });
+      }
+
+      bcrypt_callback();
+
+
     }
   }).select('+password'); // also query password for this endpoint only
 });
