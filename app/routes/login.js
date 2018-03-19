@@ -23,6 +23,7 @@ router.post('/api/login', function(req, res) {
   }, function(err, user) {
 
     console.log("query done");
+    console.log(user);
 
     if (err) {
       throw err;
@@ -68,7 +69,7 @@ router.post('/api/login', function(req, res) {
 
 
     }
-  }).select('+password'); // also query password for this endpoint only
+  })
 });
 
 module.exports = router;
