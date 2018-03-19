@@ -43,6 +43,10 @@ router.post('/api/register', function(req, res) {
             time_played: parseInt(0)
           });
 
+          console.log("register");
+          console.log(hash);
+          console.log(password);
+
           newUser.save(function(err) {
             if (err) {
               throw err;

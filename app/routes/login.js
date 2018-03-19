@@ -33,6 +33,10 @@ router.post('/api/login', function(req, res) {
       });
     } else if (user) {
 
+      console.log("login");
+      console.log(req.body.password);
+      console.log(user.password);
+
       bcrypt.compare(req.body.password, user.password, function(err, success) {
         if (success) {
           const payload = {
