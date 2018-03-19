@@ -13,57 +13,51 @@ router.post('/api/register', function(req, res) {
   var name = req.body.name;
   var password = req.body.password;
 
-  // make sure user doesn't already exist
-  async function getAThing() {
-    User.findOne({
-      name: name
-    }, function(err, user) {
+  User.findOne({
+    name: name
+  }, function(err, user) {
 
-      if (err) {
-        throw err;
-      }
+    if (err) {
+      throw err;
+    }
 
-      if (user) {
-        res.json({
-          success: false,
-          message: 'Register failed. Someone already has this name.'
-        });
-      } else {
+    if (user) {
+      res.json({
+        success: false,
+        message: 'Register failed. Someone already has this name.'
+      });
+    } else {
 
-        bcrypt.genSalt(12, function(err, salt) {
-          bcrypt.hash(password, salt, function(err, hash) {
-            var newUser = new User({
-              name: name,
-              password: hash,
-              admin: false,
-              shots_fired: parseInt(0),
-              kills: parseInt(0),
-              deaths: parseInt(0),
-              games_played: parseInt(0),
-              games_won: parseInt(0),
-              time_played: parseInt(0)
+      bcrypt.genSalt(12, function(err, salt) {
+        bcrypt.hash(password, salt, function(err, hash) {
+          var newUser = new User({
+            name: name,
+            password: hash,
+            admin: false,
+            shots_fired: parseInt(0),
+            kills: parseInt(0),
+            deaths: parseInt(0),
+            games_played: parseInt(0),
+            games_won: parseInt(0),
+            time_played: parseInt(0)
+          });
+
+          newUser.save(function(err) {
+            if (err) {
+              throw err;
+            }
+
+            console.log('New user created successfully');
+            res.json({
+              success: true,
+              message: 'New user created.'
             });
 
-            newUser.save(function(err) {
-              if (err) {
-                throw err;
-              }
-
-              console.log('New user created successfully');
-              res.json({
-                success: true,
-                message: 'New user created.'
-              });
-
-            });
           });
         });
-      }
-    });
-  }
-
-  getAThing();
-
+      });
+    }
+  });
 });
 
 module.exports = router;
