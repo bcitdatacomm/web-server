@@ -13,7 +13,6 @@ router.post('/api/register', function(req, res) {
   var name = req.body.name;
   var password = req.body.password;
 
-  // make sure user doesn't already exist
   User.findOne({
     name: name
   }, function(err, user) {
@@ -48,7 +47,6 @@ router.post('/api/register', function(req, res) {
               throw err;
             }
 
-            console.log('New user created successfully');
             res.json({
               success: true,
               message: 'New user created.'

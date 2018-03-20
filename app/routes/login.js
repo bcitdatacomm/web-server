@@ -57,8 +57,9 @@ router.post('/api/login', function(req, res) {
           });
         }
       });
+
     }
-  }).select('+password'); // also query password for this endpoint only
+  })
 });
 
 module.exports = router;
