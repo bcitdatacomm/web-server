@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var morganBody = require('morgan-body');
 var mongoose = require('mongoose');
+var pug = require('pug');
 
 var bcrypt = require('bcryptjs');
 var dotenv = require('dotenv').load();
@@ -23,12 +24,28 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
+app.set('view engine', 'pug'); // used to be jade
+
 app.use(morgan('dev')); // logging
 
 morganBody(app);
 
 app.get('/', function(req, res) {
-  res.send('LRS Server');
+  res.render('../app/views/home', {
+    title: 'Highnoon'
+  });
+});
+
+app.get('/register', function(req, res) {
+  res.render('../app/views/register', {
+    title: 'Register'
+  });
+});
+
+app.get('/login', function(req, res) {
+  res.render('../app/views/login', {
+    title: 'Login'
+  });
 });
 
 // routing

@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  form.form(action="/api/login" method="POST")
+    fieldset
+      label(for="name") name
+      input(type="text" name="name")
+      br
+      br
+      label(for="password") password
+      input(type="password" name="password")
+      hr
+      input.button(type="submit" value="login →")
