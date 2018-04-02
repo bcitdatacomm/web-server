@@ -33,6 +33,7 @@ router.post('/api/register', function(req, res) {
           var newUser = new User({
             name: name,
             password: hash,
+            logins: parseInt(0),
             admin: false,
             shots_fired: parseInt(0),
             kills: parseInt(0),

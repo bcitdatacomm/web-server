@@ -18,8 +18,12 @@ router.post('/api/login', function(req, res) {
   var expiry = 60; // one hour
 
   // find the user
-  User.findOne({
+  User.findOneAndUpdate({
     name: name
+  }, {
+    $inc: {
+      logins: +1
+    }
   }, function(err, user) {
 
     if (err) {
