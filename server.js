@@ -56,6 +56,7 @@ app.use(require('./app/routes/login'));
 app.use(require('./app/routes/auth'));
 app.use(require('./app/routes/users'));
 app.use(require('./app/routes/report_match'));
+app.use(require('./app/routes/report_win'));
 app.use(require('./app/routes/user'));
 app.use(require('./app/routes/gameserver'));
 
